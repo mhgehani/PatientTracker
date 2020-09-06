@@ -1,0 +1,22 @@
+{
+  "patients": [
+    {
+      "age": 24,
+      "DateOfBirth": "1994-01-01",
+      "PatientName": "Mayur",
+      "id": 2
+    },
+    {
+      "age": 17,
+      "DateOfBirth": "2001-01-01",
+      "PatientName": "Abhsihek",
+      "id": 3
+    },
+    {
+      "age": 58,
+      "DateOfBirth": "1960-08-16",
+      "PatientName": "Veena Gehani",
+      "id": 4
+    }
+  ]
+}

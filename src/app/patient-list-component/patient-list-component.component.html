@@ -1,0 +1,91 @@
+<div class='alert alert-primary'>
+  <h2 align='center'>
+    Patient Tracker</h2>
+</div>
+
+<div class="">
+  <h4 class="float-left">
+    Patient List</h4>
+  <h6 align='right'>Sort By Age:
+    <button class="btn btn-primary btn-sm" (click)="order='asc'">ASC</button> &nbsp;
+    <button class="btn btn-primary btn-sm" (click)="order='dsc'">DESC</button>
+  </h6>
+</div>
+
+<div class="row border" #showList>
+  <th class="col border ">Select</th>
+  <th class="col border">Patient Id</th>
+  <th class="col border">Patient Name</th>
+  <th class="col border">Patient DOB</th>
+  <th class="col border">Patient Age</th>
+  <th class="col border">Operation</th>
+</div>
+
+<div class="row border" *ngFor='let patient of patients | sortBy:order '>
+  <div class="checkbox col-lg-2 border">
+    <input type="checkbox" (change)='onCheckboxChange($event,patient)'>
+  </div>
+
+  <div class="col-lg-8 border">
+    <app-patient-component [patient]='patient'></app-patient-component>
+  </div>
+
+  <div class="col-lg-2 border">
+    <button class="btn btn-link" (click)='deletePatient(patient.id) '>Delete</button>
+  </div>
+</div>
+
+<br/>
+<!-- (click)="deleteMultiplePatients()" -->
+<button class="btn btn-info" (click)="deleteMultiplePatients()" data-toggle="modal" data-target="#myModal">Delete Multiple</button> &nbsp;
+<button class=" btn btn-info" (click)="showAddPatientComponent() ">AddPatient</button>
+
+<div>
+  <app-add-patient [showComponent]="showVar"></app-add-patient>
+</div>
+<br/>
+
+<h6 class="text-danger">{{errorMessage}}</h6>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal" *ngIf="errorMessage==''">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Patient(s)</h4>
+        <button #closeBtn type="button" class="close" data-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="row border">
+          <th class="col">Patient Id</th>
+          <th class="col">Patient Name</th>
+          <th class="col">Patient DOB</th>
+          <th class="col">Patient Age</th>
+        </div>
+
+        <div class="row border" *ngFor='let patient of selectedIDs'>
+          <div class="col">{{patient.id}}</div>
+          <div class="col">{{patient.PatientName}}</div>
+          <div class="col">{{patient.DateOfBirth}}</div>
+          <div class="col">{{patient.age}}</div>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <span align="left" class="text-danger">Above record(s) will be permanently deleted in
+          <b>{{countDown}}</b> seconds.. Press Undo to prevent</span>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="getDeletedRecordsBack()">Undo</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="alert alert-danger" *ngIf='deleteUnsuccessfull'>Unable to delete patient(s)</div>
+<div class="alert alert-success" *ngIf='deletedFlag'>Patient(s) deleted successfully</div>

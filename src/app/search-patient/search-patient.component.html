@@ -1,0 +1,25 @@
+<div class="container" *ngIf="showPatientDiv">
+  <div class="row border">
+    <th class="col border">Patient Id</th>
+    <th class="col border">Patient Name</th>
+    <th class="col border">Patient DOB</th>
+    <th class="col border">Patient Age</th>
+  </div>
+  <div class="row border">
+    <div class="col border">
+      {{patient.id}}
+    </div>
+    <div class="col border">
+      {{patient.PatientName}}
+    </div>
+    <div class="col border">
+      {{patient.DateOfBirth}}
+    </div>
+    <div class="col border">
+      {{patient.age}} </div>
+  </div>
+</div>
+
+<div *ngIf="showErrorDiv">
+  <h2>{{errorMessage}}</h2>
+</div>
